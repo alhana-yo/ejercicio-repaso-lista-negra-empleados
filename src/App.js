@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { getPersons } from './services/personService';
+import Filter from './components/Filter';
+import PersonList from './components/PersonsList';
+import PersonDetail from './components/PersonDetail';
 import './App.css';
 
 class App extends Component {
@@ -26,6 +29,7 @@ class App extends Component {
       query: userQuery
     });
   }
+
   filterData(){
     const filteredResults = this.state.results.filter(item => {
       const fullName = `${item.name.first} ${item.name.last}`;
@@ -77,33 +81,20 @@ class App extends Component {
   }
   render() {
     const arrayFromFilter = this.filterData();
+    const {results} = this.state;
     return (
       <div className="app">
         <header className="app__header">
           <h1 className="app__title">Lista negra de empleados <span role="img" aria-label="WHATT">🤯</span></h1>
-          <div className="app__input">
-            <div className="app__filter-itm">
-              <input type="text" className="app__filter-full-name" placeholder="Busca a los culpables" onKeyUp={this.getUserInput}/>
-            </div>
-          </div>
+          <Filter KeyupAction = {this.getUserInput}/>
+          
         </header>
         <main className="app__main">
-          <ul className="app__list">
-            {/* {this.state.results.map(item => { */}
-            {arrayFromFilter.map(item => {
 
-              return (
-                <li className="app__list-item" id={item.id} key={item.id}>
-                  <div className="person">
-                    <h2 className="person__name">{`${item.name.title} ${item.name.first} ${item.name.last}`}</h2>
-                    <img src={item.picture.large} alt={`${item.name.title} ${item.name.first}${item.name.last}`} className="person__image" />
-                    <div className="person__age">{item.dob.age}</div>
-                    <div className="person__city">{item.location.city}</div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <PersonDetail filteredArray = {results} personId={1}/>
+
+          <PersonList filteredArray = {arrayFromFilter}/>
+          
         </main>
 
       </div>
