@@ -7,7 +7,4 @@ class NoPerson extends Component {
     }
 }
 
-// NoPerson.propTypes = {
-//     filteredArray: PropTypes.array.isRequired
-// }
 export default NoPerson;
