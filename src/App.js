@@ -36,6 +36,7 @@ class App extends Component {
       }
       //el if hecho con un ternario
       //return (fullName.toLocaleLowerCase().includes(this.state.query.toLocaleLowerCase())) ? true: false; 
+      
     });
 
     return filteredResults;
